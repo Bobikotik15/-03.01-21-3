@@ -10,8 +10,12 @@ namespace ConsoleApp129
 {
     static void Main(string[] args)
     {
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.DisplayMenu();
+
             Map map = new Map();
             map.Map_generation();
+
             ConsoleKeyInfo key = Console.ReadKey();
 
             while (key.Key != ConsoleKey.Escape)

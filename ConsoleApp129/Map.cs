@@ -9,7 +9,7 @@ namespace ConsoleApp129
     internal class Map
     {
         Random rand = new Random();
-        MapObject[,] map = new MapObject[25, 25];
+        MapObject[,] map = new MapObject[25, 25]; // создание поля с размером 25 на 25
 
        
         public void Map_generation()
@@ -138,10 +138,15 @@ namespace ConsoleApp129
                         }
 
                         
-                        if (newMap[newX, newY] is Field)
+                        if (newMap[newX, newY] is Field) // проверка типа объекта
                         {
                             newMap[newX, newY] = map[i, j];
                             newMap[i, j] = new Field();
+                        }
+                        else if (newMap[newX, newY] is Enemy)
+                        {
+                            Console.WriteLine("Столкновение с врагом!");
+                            EnemyMenu.ShowEnemyInteractionMenu();
                         }
                     }
                 }

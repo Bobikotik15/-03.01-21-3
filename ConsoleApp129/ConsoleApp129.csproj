@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnemyMenu.cs" />
+    <Compile Include="Exception.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MapObject.cs" />

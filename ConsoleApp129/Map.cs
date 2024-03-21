@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +37,6 @@ namespace ConsoleApp129
                     {
                         map[i, j] = new Hero(i, j);
                     }
-
                 }
             }
         }
@@ -85,7 +85,6 @@ namespace ConsoleApp129
                                 break;
                         }
 
-
                         if (newMap[newX, newY] is Field)
                         {
                             newMap[newX, newY] = map[i, j];
@@ -104,45 +103,60 @@ namespace ConsoleApp129
 
         public void MovePersons(ConsoleKey key)
         {
+           
             MapObject[,] newMap = new MapObject[map.GetLength(0), map.GetLength(1)];
             Array.Copy(map, newMap, map.Length);
             for (int i = 0; i < map.GetLength(0); i++)
             {
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
-                    if (map[i, j] is Hero)
+                    if (key != ConsoleKey.Escape) // при нажатии на Escape выход в главное меню без затрагивания обработкой исключений
                     {
-                        int newX = i, newY = j;
-                        switch (key)
+                        if (map[i, j] is Hero)
                         {
-                            case ConsoleKey.UpArrow:
-                                newX = (i - 1 + map.GetLength(0)) % map.GetLength(0);
-                                break;
-                            case ConsoleKey.DownArrow:
-                                newX = (i + 1) % map.GetLength(0);
-                                break;
-                            case ConsoleKey.LeftArrow:
-                                newY = (j - 1 + map.GetLength(1)) % map.GetLength(1);
-                                break;
-                            case ConsoleKey.RightArrow:
-                                newY = (j + 1) % map.GetLength(1);
-                                break;
-                        }
-
-                        if (newMap[newX, newY] is Field) // проверка типа объекта
-                        {
-                            newMap[newX, newY] = map[i, j];
-                            newMap[i, j] = new Field();
-                        }
-                        if (newMap[newX, newY] is Enemy)
-                        {
-                            Console.WriteLine("Столкновение с врагом!");
-                            EnemyMenu.ShowEnemyInteractionMenu();
-                            if (EnemyMenu.EnemyMenuChoice == 1)
+                            int newX = i, newY = j;
+                            switch (key)
                             {
-                                newMap[newX, newY] = new Field(); // После атаки вражеский объект исчезает с поля
+                                case ConsoleKey.UpArrow:
+                                    newX = (i - 1 + map.GetLength(0)) % map.GetLength(0);
+                                    break;
+                                case ConsoleKey.DownArrow:
+                                    newX = (i + 1) % map.GetLength(0);
+                                    break;
+                                case ConsoleKey.LeftArrow:
+                                    newY = (j - 1 + map.GetLength(1)) % map.GetLength(1);
+                                    break;
+                                case ConsoleKey.RightArrow:
+                                    newY = (j + 1) % map.GetLength(1);
+                                break;
+                                default:
+                                    try
+                                    {
+                                        throw new ButtonException("");
+                                    }
+                                    catch(ButtonException ex)
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine(ex.Message); // Вывод сообщения об ошибке в исключении  
+                                        Console.ReadLine();
+                                    }
+                                break;
                             }
-                            else if (EnemyMenu.EnemyMenuChoice == 0); // Проверка выбора побега, чтобы враг не исчезал в последовательности атака - сбежать
+
+                            if (newMap[newX, newY] is Field) // проверка типа объекта
+                            {
+                                newMap[newX, newY] = map[i, j];
+                                newMap[i, j] = new Field();
+                            }
+                            if (newMap[newX, newY] is Enemy)
+                            {
+                                EnemyMenu.ShowEnemyInteractionMenu();
+                                if (EnemyMenu.EnemyMenuChoice == 1)
+                                {
+                                    newMap[newX, newY] = new Field(); // После атаки вражеский объект исчезает с поля
+                                }
+                                else if (EnemyMenu.EnemyMenuChoice == 0) ; // Проверка выбора побега, чтобы враг не исчезал в последовательности атака - сбежать
+                            }
                         }
                     }
                 }

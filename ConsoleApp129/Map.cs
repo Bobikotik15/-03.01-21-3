@@ -9,11 +9,18 @@ namespace ConsoleApp129
 {
     internal class Map
     {
+        private int enemyCount; //Переменная для отслеживания количества врагов
+
         Random rand = new Random();
         MapObject[,] map = new MapObject[25, 25]; // создание поля с размером 25 на 25
 
+        /// <summary>
+        /// Метод генерации карты
+        /// </summary>
         public void Map_generation()
         {
+            enemyCount = 0;
+
             for (int i = 0; i < map.GetLength(0); i++)
             {
                 for (int j = 0; j < map.GetLength(1); j++)
@@ -28,6 +35,7 @@ namespace ConsoleApp129
                     if (A < 1)
                     {
                         map[i, j] = new Enemy(i, j);
+                        enemyCount++;// Увеличение счетчика врагов
                     }
                     if (A > 5 && A < 10)
                     {
@@ -40,7 +48,9 @@ namespace ConsoleApp129
                 }
             }
         }
-
+        /// <summary>
+        /// Выводит карту на экран
+        /// </summary>
         public void Drawing_the_map()
         {
             for (int i = 0; i < map.GetLength(0); i++)
@@ -53,7 +63,9 @@ namespace ConsoleApp129
                 Console.WriteLine();
             }
         }
-
+        /// <summary>
+        /// Обновляет положение объектов на карте
+        /// </summary>
         public void MovePersons()
         {
             MapObject[,] newMap = new MapObject[map.GetLength(0), map.GetLength(1)];
@@ -96,11 +108,19 @@ namespace ConsoleApp129
 
             Array.Copy(newMap, map, map.Length);
         }
+        /// <summary>
+        /// логика для получения выбора пользователя в меню
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
         public static void GetMenuChoice(int min, int max)
         {
             Menu menu = new Menu();
         }
-
+        /// <summary>
+        /// Перемещает объекты на карте в соответствии с нажатой клавишей на клавиатуре
+        /// </summary>
+        /// <param name="key"></param>
         public void MovePersons(ConsoleKey key)
         {
            
@@ -154,6 +174,7 @@ namespace ConsoleApp129
                                 if (EnemyMenu.EnemyMenuChoice == 1)
                                 {
                                     newMap[newX, newY] = new Field(); // После атаки вражеский объект исчезает с поля
+                                    enemyCount--; // Уменьшение счетчика количества врагов
                                 }
                                 else if (EnemyMenu.EnemyMenuChoice == 0) ; // Проверка выбора побега, чтобы враг не исчезал в последовательности атака - сбежать
                             }
@@ -162,6 +183,10 @@ namespace ConsoleApp129
                 }
             }
             Array.Copy(newMap, map, map.Length);
+            if (enemyCount == 0)// Генерация новой карты
+            {
+                Map_generation();
+            }
         }
     }
 }

@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp129
 {
+    /// <summary>
+    /// Класс представляющий программу
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Точка входа в программу. Основной метод программы, запускающий игровой цикл
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Menu menu = new Menu();

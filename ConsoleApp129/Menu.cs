@@ -7,18 +7,28 @@ using System.Threading.Tasks;
 namespace ConsoleApp129
 
 {
-    internal  class Menu
+    /// <summary>
+    /// Класс для работы с меню
+    /// </summary>
+    internal class Menu
     {
+        /// <summary>
+        /// Отображает опции меню
+        /// </summary>
         public static void DisplayOption()
         {
             MainMenu.DisplayMenu();
         }
     }
-
+    /// <summary>
+    /// Класс для работы с главным меню. Наследуется от класса Menu
+    /// </summary>
     internal class MainMenu : Menu
     {
         private static int currentChoice = 1; ////Объявление переменной для хранения текущего выбранного пункта меню
-
+        /// <summary>
+        /// Отображает главное меню
+        /// </summary>
         public static void DisplayMenu()
         {
             Console.WriteLine("Главное меню");
@@ -85,18 +95,27 @@ namespace ConsoleApp129
                 DisplayMenu();
             }
         }
-
+        /// <summary>
+        /// Метод возвращения в главное меню
+        /// </summary>
             public static void ReturnToMainMenu()
             {
             DisplayMenu();
             }
     }
+    /// <summary>
+    /// Абстрактный класс для работы с меню взаимодействия с врагом. Наследуется от класса Menu
+    /// </summary>
     internal abstract class EnemyMenu : Menu 
     {
+
         private static int currentChoice = 1; //Объявление переменной для хранения текущего выбранного пункта меню
 
         public static int EnemyMenuChoice; // Переменная для хранения выбора пользователя
 
+        /// <summary>
+        /// Отображение меню взаимодействия с врагом
+        /// </summary>
         public static void ShowEnemyInteractionMenu()
         {
 

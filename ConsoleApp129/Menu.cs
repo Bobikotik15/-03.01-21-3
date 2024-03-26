@@ -75,11 +75,11 @@ namespace ConsoleApp129
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("☺ - игрок");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("☺ - враг, может двигаться только по одной клетке за ход");
+                        Console.WriteLine("☺ - враг, может двигаться только по одной клетке за ход. При убийстве дает 100 баллов");
                         Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.WriteLine("☺ - враг, может двигаться прыжками");
+                        Console.WriteLine("☺ - враг, может двигаться прыжками. При убийстве дает 200 баллов");
                         Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Console.WriteLine("☺ - враг, может двигаеться по диагонали и прыжками");
+                        Console.WriteLine("☺ - враг, может двигаеться по диагонали и прыжками. При убийстве дает 300 баллов");
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("+ - стены");
                         Console.ForegroundColor = ConsoleColor.DarkGreen;

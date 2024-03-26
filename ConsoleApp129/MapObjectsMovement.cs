@@ -131,7 +131,7 @@ namespace ConsoleApp129
         /// Перемещает объекты на карте в соответствии с нажатой клавишей на клавиатуре
         /// </summary>
         /// <param name="key"></param>
-        public void MovePersons(ConsoleKey key, MapObject[,] map, ref int enemyCount, ref int enemyCount2, ref int enemyCount3)
+        public void MovePersons(ConsoleKey key, MapObject[,] map, ref int enemyCount, ref int enemyCount2, ref int enemyCount3,ref int totalPoints)
         {
             MapObject[,] newMap = new MapObject[map.GetLength(0), map.GetLength(1)];
             Array.Copy(map, newMap, map.Length);
@@ -184,6 +184,7 @@ namespace ConsoleApp129
                                 {
                                     newMap[newX, newY] = new Field(); // После атаки вражеский объект исчезает с поля
                                     enemyCount--; // Уменьшение счетчика количества врагов
+                                    totalPoints += 100;
                                 }
                                 else if (EnemyMenu.EnemyMenuChoice == 0) ; // Проверка выбора побега, чтобы враг не исчезал в последовательности атака - сбежать
                             }
@@ -194,6 +195,7 @@ namespace ConsoleApp129
                                 {
                                     newMap[newX, newY] = new Field(); // После атаки вражеский объект исчезает с поля
                                     enemyCount2--; // Уменьшение счетчика количества врагов
+                                    totalPoints += 200;
                                 }
                                 else if (EnemyMenu.EnemyMenuChoice == 0) ; // Проверка выбора побега, чтобы враг не исчезал в последовательности атака - сбежать
                             }
@@ -204,8 +206,9 @@ namespace ConsoleApp129
                                 {
                                     newMap[newX, newY] = new Field(); // После атаки вражеский объект исчезает с поля
                                     enemyCount3--; // Уменьшение счетчика количества врагов
+                                    totalPoints += 300;
                                 }
-                                else if (EnemyMenu.EnemyMenuChoice == 0) ; // Проверка выбора побега, чтобы враг не исчезал в последовательности атака - сбежать
+                                else if (EnemyMenu.EnemyMenuChoice == 0); // Проверка выбора побега, чтобы враг не исчезал в последовательности атака - сбежать
                             }
                         }
                     }

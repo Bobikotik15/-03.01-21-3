@@ -18,6 +18,8 @@ namespace ConsoleApp129
         private int enemyCount2; //Переменная для отслеживания количества врагов
         private int enemyCount3; //Переменная для отслеживания количества врагов
 
+        private int totalPoints = 0; //Переменная для баллов
+
         Random rand = new Random();
         MapObject[,] map = new MapObject[25, 25]; // создание поля с размером 25 на 25
 
@@ -95,7 +97,7 @@ namespace ConsoleApp129
         /// </summary>
         public void MovePersons()
         {
-            objectsMovement.MovePersons(map);
+      //      objectsMovement.MovePersons(map);
         }
         /// <summary>
         /// логика для получения выбора пользователя в меню
@@ -113,10 +115,11 @@ namespace ConsoleApp129
         public void MovePersons(ConsoleKey key)
         {
             MapObjectsMovement objectsMovement = new MapObjectsMovement();
-            objectsMovement.MovePersons(key, map, ref enemyCount, ref enemyCount2, ref enemyCount3);
+            objectsMovement.MovePersons(key, map, ref enemyCount, ref enemyCount2, ref enemyCount3, ref totalPoints);
             if (enemyCount == 0 && enemyCount2 == 0 && enemyCount3 == 0)// Генерация новой карты
             {
-                Console.WriteLine("Все противники побеждены! Переход на следующий уровень...");
+                Console.WriteLine($"Все противники побеждены! Заработано {totalPoints}! Переход на следующий уровень...");;
+                Console.ReadLine();
                 Map_generation();
             }
         }

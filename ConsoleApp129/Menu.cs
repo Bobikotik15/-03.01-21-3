@@ -75,7 +75,11 @@ namespace ConsoleApp129
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("☺ - игрок");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("☺ - враг");
+                        Console.WriteLine("☺ - враг, может двигаться только по одной клетке за ход");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.WriteLine("☺ - враг, может двигаться прыжками");
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.WriteLine("☺ - враг, может двигаеться по диагонали и прыжками");
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("+ - стены");
                         Console.ForegroundColor = ConsoleColor.DarkGreen;

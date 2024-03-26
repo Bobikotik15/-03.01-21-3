@@ -68,4 +68,42 @@ namespace ConsoleApp129
             return base.Rendering_on_the_map();
         }
     }
+    /// <summary>
+    /// Представляет объект врага второго типа на карте
+    /// </summary>
+    internal class Enemy2 : Person
+    {
+        /// <summary>
+        /// Метод инициализирует новый экземпляр класса Enemy с указанными координатами X и Y
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        public Enemy2(int X, int Y) : base(X, Y)
+        {
+        }
+        public override char Rendering_on_the_map()
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            return base.Rendering_on_the_map();
+        }
+    }
+    /// <summary>
+    /// Представляет объект врага третьего типа на карте
+    /// </summary>
+    internal class Enemy3 : Person
+    {
+        /// <summary>
+        /// Метод инициализирует новый экземпляр класса Enemy с указанными координатами X и Y
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        public Enemy3(int X, int Y) : base(X, Y)
+        {
+        }
+        public override char Rendering_on_the_map()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            return base.Rendering_on_the_map();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +19,13 @@ namespace ConsoleApp129
         static void Main(string[] args)
         {
             Menu menu = new Menu();
-
+            Map map = new Map();
+            ConsoleKeyInfo key;
             do
             {
                 Menu.DisplayOption();
-                Map map = new Map();
                 map.Map_generation();
-                ConsoleKeyInfo key = Console.ReadKey();
+                key = Console.ReadKey(true);
 
                 while (key.Key != ConsoleKey.Escape)
                 {
@@ -33,6 +34,17 @@ namespace ConsoleApp129
                     map.MovePersons(key.Key);
                     map.MovePersons();
                     Console.Clear();
+
+                    if (key.Key == ConsoleKey.F5)  // Обрабатка нажатия клавиши F5
+                    {
+                        int totalPoints = map.TotalPoints;
+                        File.WriteResultsToFile(totalPoints);
+                        File.ReadMaxPointsFromFile();
+                    }
+                    if (key.Key == ConsoleKey.F6) // Обрабатка нажатия клавиши F6
+                    {
+                        File.ReadMaxPointsFromFile();
+                    }
                 }
             }
             while (true);

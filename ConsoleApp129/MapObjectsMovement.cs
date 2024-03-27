@@ -31,6 +31,7 @@ namespace ConsoleApp129
                         int direction = rand.Next(4);
 
                         int newX = i, newY = j;
+
                         switch (direction)
                         {
                             case 0:
@@ -127,6 +128,7 @@ namespace ConsoleApp129
             }
             Array.Copy(newMap, map, map.Length);
         }
+
         /// <summary>
         /// Перемещает объекты на карте в соответствии с нажатой клавишей на клавиатуре
         /// </summary>
@@ -144,6 +146,7 @@ namespace ConsoleApp129
                         if (map[i, j] is Hero)
                         {
                             int newX = i, newY = j;
+
                             switch (key)
                             {
                                 case ConsoleKey.UpArrow:
@@ -159,19 +162,31 @@ namespace ConsoleApp129
                                     newY = (j + 1) % map.GetLength(1);
                                     break;
                                 default:
-                                    try
-                                    {
-                                        throw new ButtonException("");
-                                    }
-                                    catch (ButtonException ex)
+                                    if (key == ConsoleKey.F5) // при нажатии на F5 выход в главное меню без затрагивания обработкой исключений
                                     {
                                         Console.Clear();
-                                        Console.WriteLine(ex.Message); // Вывод сообщения об ошибке в исключении  
+                                        Console.WriteLine("Сохранение в файл");
                                         Console.ReadLine();
+                                    }
+                                    else if (key == ConsoleKey.F6) // при нажатии на F6 выход в главное меню без затрагивания обработкой исключений
+                                    {
+                                        File.ReadMaxPointsFromFile();
+                                    }
+                                    else 
+                                    {
+                                        try
+                                        {
+                                            throw new ButtonException("");
+                                        }
+                                        catch (ButtonException ex)
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine(ex.Message); // Вывод сообщения об ошибке в исключении  
+                                            Console.ReadLine();
+                                        }
                                     }
                                     break;
                             }
-
                             if (newMap[newX, newY] is Field) // проверка типа объекта
                             {
                                 newMap[newX, newY] = map[i, j];

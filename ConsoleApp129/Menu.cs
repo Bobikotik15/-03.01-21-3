@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleApp129
-
 {
     /// <summary>
     /// Класс для работы с меню
@@ -112,7 +111,6 @@ namespace ConsoleApp129
     /// </summary>
     internal abstract class EnemyMenu : Menu 
     {
-
         private static int currentChoice = 1; //Объявление переменной для хранения текущего выбранного пункта меню
 
         public static int EnemyMenuChoice; // Переменная для хранения выбора пользователя
@@ -155,7 +153,6 @@ namespace ConsoleApp129
             }
 
             if (key == ConsoleKey.Enter)
-
             {
                 switch (currentChoice)
                 {
@@ -181,7 +178,7 @@ namespace ConsoleApp129
                         Console.WriteLine("Неправильный выбор!");
                         break;
                 }
-        }
+            }
             else
             {
                 Console.Clear();

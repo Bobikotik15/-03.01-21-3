@@ -14,7 +14,6 @@ namespace ConsoleApp129
         int pointX;
         int pointY;
 
-
         public Person(int X,int Y)
         {
             pointX = X; pointY = Y; 
@@ -42,7 +41,6 @@ namespace ConsoleApp129
         {
 
         }
-
         public override char Rendering_on_the_map()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

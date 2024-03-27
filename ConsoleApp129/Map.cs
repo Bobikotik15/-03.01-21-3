@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,11 @@ namespace ConsoleApp129
         private int enemyCount2; //Переменная для отслеживания количества врагов
         private int enemyCount3; //Переменная для отслеживания количества врагов
 
-        private int totalPoints = 0; //Переменная для баллов
+        private int totalPoints =+ 0; //Переменная для баллов
+        public int TotalPoints // Получение значения количества баллов
+        {
+            get { return totalPoints; }
+        }
 
         Random rand = new Random();
         MapObject[,] map = new MapObject[25, 25]; // создание поля с размером 25 на 25
@@ -31,15 +36,13 @@ namespace ConsoleApp129
             enemyCount = 0;
             enemyCount2 = 0;
             enemyCount3 = 0;
-
+            
             for (int i = 0; i < map.GetLength(0); i++)
             {
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
                     int A = rand.Next(100);
-                    int B = rand.Next(100);
-                    int C = rand.Next(100);
-
+                    
                     map[i, j] = new Field();
 
                     if (A > 1 && A < 6)
@@ -60,19 +63,19 @@ namespace ConsoleApp129
                     if (A < 1)
                     {
                         map[i, j] = new Enemy(i, j);
-                        enemyCount++;// Увеличение счетчика врагов
+                        enemyCount++; // Увеличение счетчика врагов
                     }
-                    if (B < 1)
-                    {
-                           map[i, j] = new Enemy2(i, j);
 
-                        enemyCount2++;// Увеличение счетчика врагов
+                    if (A >= 1 && A < 2) 
+                    {
+                        map[i, j] = new Enemy2(i, j);
+                        enemyCount2++; // Увеличение счетчика врагов
                     }
-                    if (C < 1)
+
+                    if (A >= 2 && A < 3)
                     {
                         map[i, j] = new Enemy3(i, j);
-
-                        enemyCount3++;// Увеличение счетчика врагов
+                        enemyCount3++; // Увеличение счетчика врагов
                     }
                 }
             }
@@ -97,7 +100,7 @@ namespace ConsoleApp129
         /// </summary>
         public void MovePersons()
         {
-      //      objectsMovement.MovePersons(map);
+            objectsMovement.MovePersons(map);
         }
         /// <summary>
         /// логика для получения выбора пользователя в меню
@@ -108,6 +111,7 @@ namespace ConsoleApp129
         {
             Menu menu = new Menu();
         }
+
         /// <summary>
         /// Перемещает объекты на карте в соответствии с нажатой клавишей на клавиатуре
         /// </summary>
@@ -118,7 +122,11 @@ namespace ConsoleApp129
             objectsMovement.MovePersons(key, map, ref enemyCount, ref enemyCount2, ref enemyCount3, ref totalPoints);
             if (enemyCount == 0 && enemyCount2 == 0 && enemyCount3 == 0)// Генерация новой карты
             {
-                Console.WriteLine($"Все противники побеждены! Заработано {totalPoints}! Переход на следующий уровень...");;
+                Console.WriteLine($"Все противники побеждены! Заработано {totalPoints}! Переход на следующий уровень...");
+
+                File.WriteResultsToFile(totalPoints); // Запись результата в файл
+                File.ReadMaxPointsFromFile(); // Чтение и вывод максимального количества баллов из файла
+
                 Console.ReadLine();
                 Map_generation();
             }
